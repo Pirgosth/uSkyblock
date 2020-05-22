@@ -82,6 +82,56 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>2.22.2</version>
                 </plugin>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                	<groupId>org.eclipse.m2e</groupId>
+                	<artifactId>lifecycle-mapping</artifactId>
+                	<version>1.0.0</version>
+                	<configuration>
+                		<lifecycleMappingMetadata>
+                			<pluginExecutions>
+                				<pluginExecution>
+                					<pluginExecutionFilter>
+                						<groupId>
+                							com.google.code.maven-replacer-plugin
+                						</groupId>
+                						<artifactId>
+                							replacer
+                						</artifactId>
+                						<versionRange>
+                							[1.5.3,)
+                						</versionRange>
+                						<goals>
+                							<goal>replace</goal>
+                						</goals>
+                					</pluginExecutionFilter>
+                					<action>
+                						<ignore></ignore>
+                					</action>
+                				</pluginExecution>
+                				<pluginExecution>
+                					<pluginExecutionFilter>
+                						<groupId>
+                							org.apache.maven.plugins
+                						</groupId>
+                						<artifactId>
+                							maven-assembly-plugin
+                						</artifactId>
+                						<versionRange>
+                							[3.1.1,)
+                						</versionRange>
+                						<goals>
+                							<goal>single</goal>
+                						</goals>
+                					</pluginExecutionFilter>
+                					<action>
+                						<ignore></ignore>
+                					</action>
+                				</pluginExecution>
+                			</pluginExecutions>
+                		</lifecycleMappingMetadata>
+                	</configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -94,17 +144,13 @@
             <id>papermc</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
-        <repository> <!-- Vault API -->
-            <id>vault-repo</id>
-            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
-        </repository>
         <repository> <!-- WorldEdit/WorldGuard -->
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/repo/</url>
         </repository>
         <repository> <!-- MultiVerse -->
-            <id>onarandombox</id>
-            <url>http://repo.onarandombox.com/nexus/content/groups/public</url>
+            <id>Multiverse-Core</id>
+            <url>http://repo.onarandombox.com/content/repositories/multiverse/</url>
         </repository>
         <repository> <!-- bStats -->
             <id>CodeMC</id>
@@ -126,6 +172,10 @@
             <id>uskyblock-maven</id>
             <url>https://www.uskyblock.ovh/maven/uskyblock/</url>
         </repository>
+        <repository>
+			<id>github-asyncworldedit-api</id>
+			<url>https://raw.githubusercontent.com/SBPrime/AsyncWorldEdit/maven-artifact/</url>
+		</repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -181,7 +231,7 @@
                 <version>${po-utils.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.milkbowl.vault</groupId>
+                <groupId>com.github.MilkBowl</groupId>
                 <artifactId>VaultAPI</artifactId>
                 <optional>true</optional>
                 <version>${vault.version}</version>
@@ -211,6 +261,12 @@
                 <artifactId>DeluxeChatPlaceholderAPI</artifactId>
                 <version>${deluxechat.version}</version>
             </dependency>
+            <dependency>
+				<groupId>org.primesoft.asyncworldedit</groupId>
+				<artifactId>AsyncWorldEdit-API</artifactId>
+				<version>[2.2.0-rc-01, 2.2.0)</version>
+				<type>jar</type>
+			</dependency>
         </dependencies>
     </dependencyManagement>
 </project>

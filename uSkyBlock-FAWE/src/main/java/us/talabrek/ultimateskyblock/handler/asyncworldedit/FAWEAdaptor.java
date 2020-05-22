@@ -1,23 +1,25 @@
 package us.talabrek.ultimateskyblock.handler.asyncworldedit;
 
-import com.boydti.fawe.util.EditSessionBuilder;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.bukkit.BukkitWorld;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.regions.Region;
-import com.sk89q.worldedit.world.World;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import us.talabrek.ultimateskyblock.player.PlayerPerk;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-import us.talabrek.ultimateskyblock.util.LogUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+
+import com.boydti.fawe.util.EditSessionBuilder;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
+import com.sk89q.worldedit.regions.Region;
+import com.sk89q.worldedit.world.World;
+
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.player.PlayerPerk;
+import us.talabrek.ultimateskyblock.util.LogUtil;
 
 /**
  * Adaptor depending on FAWE (FastAsyncWorldEdit).
@@ -48,7 +50,7 @@ public class FAWEAdaptor implements AWEAdaptor {
             if (file == null || !file.exists() || !file.canRead()) {
                 LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
             }
-            BlockVector3 to = BlockVector3.at(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
+            Vector to = new Vector(origin.getBlockX(), origin.getBlockY(), origin.getBlockZ());
             EditSession editSession = getEditSession(playerPerk, origin);
             try {
                 ClipboardFormats
