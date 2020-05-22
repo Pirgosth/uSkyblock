@@ -50,6 +50,7 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
     private File playerConfigFile;
 
     private boolean islandGenerating = false;
+    private boolean isSchematicPasted = false;
     private boolean dirty = false;
 
     public PlayerInfo(String currentPlayerName, UUID playerUUID) {
@@ -373,6 +374,14 @@ public class PlayerInfo implements Serializable, us.talabrek.ultimateskyblock.ap
 
     public void setIslandGenerating(boolean value) {
         this.islandGenerating = value;
+    }
+    
+    public boolean isSchematicPasted() {
+        return this.isSchematicPasted;
+    }
+
+    public void setIsSchematicPasted(boolean value) {
+        this.isSchematicPasted = value;
     }
 
     @Override
