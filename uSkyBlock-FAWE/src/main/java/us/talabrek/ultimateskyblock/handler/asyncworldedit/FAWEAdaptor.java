@@ -18,6 +18,7 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.World;
 
 import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.island.task.CreateIslandTask.SchemValidator;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 
@@ -44,7 +45,7 @@ public class FAWEAdaptor implements AWEAdaptor {
     }
 
     @Override
-    public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
+    public void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk, SchemValidator schemValidator) {
         plugin.async(() -> {
             log.finer("Trying to load schematic " + file);
             if (file == null || !file.exists() || !file.canRead()) {

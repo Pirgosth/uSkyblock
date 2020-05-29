@@ -46,6 +46,7 @@ import dk.lockfuglsang.minecraft.util.VersionUtil;
 import us.talabrek.ultimateskyblock.uSkyBlock;
 import us.talabrek.ultimateskyblock.handler.asyncworldedit.AWEAdaptor;
 import us.talabrek.ultimateskyblock.handler.task.WEPasteSchematic;
+import us.talabrek.ultimateskyblock.island.task.CreateIslandTask.SchemValidator;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 
@@ -72,8 +73,8 @@ public enum AsyncWorldEditHandler {
 		return getAWEAdaptor().createEditSession(world, maxblocks);
 	}
 
-	public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
-		new WEPasteSchematic(file, origin, playerPerk).runTask(uSkyBlock.getInstance());
+	public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, SchemValidator schemValidator) {
+		new WEPasteSchematic(file, origin, playerPerk, schemValidator).runTask(uSkyBlock.getInstance());
 	}
 
 	public static void regenerate(Region region, Runnable onCompletion) {
@@ -131,7 +132,7 @@ public enum AsyncWorldEditHandler {
 		}
 
 		@Override
-		public void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
+		public void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, SchemValidator schemValidator) {
 			log.finer("Trying to load schematic " + file);
 			if (file == null || !file.exists() || !file.canRead()) {
 				LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
@@ -158,6 +159,9 @@ public enum AsyncWorldEditHandler {
 
 					if (status == JobStatus.Done) {
 						log.log(Level.INFO, "Schematic paste successfully !");
+						if(schemValidator != null) {
+							schemValidator.validate();
+						}
 					}
 				}
 			};
