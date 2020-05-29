@@ -35,6 +35,7 @@ public class CreateIslandTask extends BukkitRunnable {
             player.sendMessage(tr("Unable to locate schematic {0}, contact a server-admin", cSchem));
         }
         GenerateTask generateTask = new GenerateTask(plugin, player, playerPerk.getPlayerInfo(), next, playerPerk, cSchem);
+<<<<<<< HEAD
         final BukkitRunnable completionWatchDog = new LocateChestTask(plugin, player, next, generateTask, schemValidator);
         completionWatchDog.runTaskTimer(plugin, 0, 20);
     }
@@ -49,5 +50,10 @@ public class CreateIslandTask extends BukkitRunnable {
     	public void validate() {
     		this.isValidated = true;
     	}
+=======
+        final int heartBeatTicks = (int) TimeUtil.millisAsTicks(plugin.getConfig().getInt("asyncworldedit.watchDog.heartBeatMs", 2000));
+        final BukkitRunnable completionWatchDog = new LocateChestTask(plugin, player, next, generateTask);
+        completionWatchDog.runTaskTimer(plugin, 0, heartBeatTicks);
+>>>>>>> parent of 74a1f13f... Fix PlayerPerk nullptr on schem loading
     }
 }

@@ -15,10 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.primesoft.asyncworldedit.api.IAsyncWorldEdit;
 import org.primesoft.asyncworldedit.api.blockPlacer.IBlockPlacer;
-import org.primesoft.asyncworldedit.api.blockPlacer.IBlockPlacerListener;
-import org.primesoft.asyncworldedit.api.blockPlacer.IJobEntryListener;
-import org.primesoft.asyncworldedit.api.blockPlacer.entries.IJobEntry;
-import org.primesoft.asyncworldedit.api.blockPlacer.entries.JobStatus;
 import org.primesoft.asyncworldedit.api.playerManager.IPlayerEntry;
 import org.primesoft.asyncworldedit.api.playerManager.IPlayerManager;
 import org.primesoft.asyncworldedit.api.utils.IFuncParamEx;
@@ -51,11 +47,12 @@ import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.util.LogUtil;
 
 /**
- * Handles integration with AWE. Very HACKY and VERY unstable.
+ * Handles integration with AWE.
+ * Very HACKY and VERY unstable.
  *
- * Only kept as a cosmetic measure, to at least try to give the players some
- * feedback.
+ * Only kept as a cosmetic measure, to at least try to give the players some feedback.
  */
+<<<<<<< HEAD
 public enum AsyncWorldEditHandler {
 	;
 	private static AWEAdaptor adaptor = null;
@@ -134,6 +131,83 @@ public enum AsyncWorldEditHandler {
 		@Override
 		public void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk, SchemValidator schemValidator) {
 			log.finer("Trying to load schematic " + file);
+=======
+public enum AsyncWorldEditHandler {;
+    private static AWEAdaptor adaptor = null;
+
+    public static void onEnable(uSkyBlock plugin) {
+        getAWEAdaptor().onEnable(plugin);
+    }
+
+    public static void onDisable(uSkyBlock plugin) {
+        getAWEAdaptor().onDisable(plugin);
+        adaptor = null;
+    }
+
+    public static EditSession createEditSession(World world, int maxblocks) {
+        return getAWEAdaptor().createEditSession(world, maxblocks);
+    }
+
+    public static void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
+        new WEPasteSchematic(file, origin, playerPerk).runTask(uSkyBlock.getInstance());
+    }
+
+    public static void regenerate(Region region, Runnable onCompletion) {
+        getAWEAdaptor().regenerate(region, onCompletion);
+    }
+
+    public static AWEAdaptor getAWEAdaptor() {
+        if (adaptor == null) {
+            if (!uSkyBlock.getInstance().getConfig().getBoolean("asyncworldedit.enabled", true)) {
+                return NULL_ADAPTOR;
+            }
+            Plugin fawe = getFAWE();
+            String className = null;
+            if (fawe != null) {
+                VersionUtil.Version version = VersionUtil.getVersion(fawe.getDescription().getVersion());
+                className = "us.talabrek.ultimateskyblock.handler.asyncworldedit.FAWEAdaptor";
+                try {
+                    adaptor = (AWEAdaptor) Class.forName(className).<AWEAdaptor>newInstance();
+                    log(Level.INFO, "Hooked into FAWE " + version);
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoClassDefFoundError e) {
+                    log(Level.WARNING, "Unable to locate FAWE adaptor for version " + version + ": " + e);
+                    adaptor = NULL_ADAPTOR;
+                }
+            } else {
+                adaptor = NULL_ADAPTOR;
+            }
+        }
+        return adaptor;
+    }
+
+    public static boolean isAWE() {
+        return getAWEAdaptor() != NULL_ADAPTOR;
+    }
+
+    public static Plugin getFAWE() {
+        return Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit");
+    }
+
+    public static IAsyncWorldEdit getAWE() {
+        return (IAsyncWorldEdit) Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
+    }
+
+    public static final AWEAdaptor NULL_ADAPTOR = new AWEAdaptor() {
+    	private final Logger log = Logger.getLogger(WorldEditHandler.class.getName());
+        @Override
+        public void onEnable(Plugin plugin) {
+
+        }
+
+        @Override
+        public void registerCompletion(Player player) {
+
+        }
+
+        @Override
+        public void loadIslandSchematic(File file, Location origin, PlayerPerk playerPerk) {
+        	log.finer("Trying to load schematic " + file);
+>>>>>>> parent of 74a1f13f... Fix PlayerPerk nullptr on schem loading
 			if (file == null || !file.exists() || !file.canRead()) {
 				LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
 			}
@@ -147,6 +221,7 @@ public enum AsyncWorldEditHandler {
 			IFuncParamEx<Integer, ICancelabeEditSession, MaxChangedBlocksException> action = new PasteAction(origin,
 					file);
 			IBlockPlacer bp = awe.getBlockPlacer();
+<<<<<<< HEAD
 			final String jobName = "loadIslandSchematic:" + origin.getWorld().getName() + "-" + origin.toString();
 			final IJobEntryListener jobEntryListener = new IJobEntryListener() {
 
@@ -178,6 +253,44 @@ public enum AsyncWorldEditHandler {
 				}
 			});
 			bp.performAsAsyncJob(tsSession, playerEntry, jobName, action);
+=======
+//			final IJobEntryListener jobEntryListener = new IJobEntryListener(){
+//
+//	            @Override
+//	            public void jobStateChanged(IJobEntry job) {
+//	                if(!job.getName().equalsIgnoreCase("loadIslandSchematic:" + playerPerk.getPlayerInfo().getPlayerName() + "-" + file.getName())) return;
+//
+//	                JobStatus status = job.getStatus();
+//
+//	                if(status == JobStatus.Done) {
+//	                	playerPerk.getPlayerInfo().setIsSchematicCopied(true);
+//	                }
+//	            }
+//	        };
+//			bp.addListener(new IBlockPlacerListener() {
+//				
+//				@Override
+//				public void jobRemoved(IJobEntry job) {
+//					job.removeStateChangedListener(jobEntryListener);
+//				}
+//				
+//				@Override
+//				public void jobAdded(IJobEntry job) {
+//					if(playerPerk == null) {
+//						Bukkit.getServer().getConsoleSender().sendMessage("PlayerPerk is null !!!!!");
+//						return;
+//					}
+//					else if(playerPerk.getPlayerInfo() == null) {
+//						Bukkit.getServer().getConsoleSender().sendMessage("PlayerInfo is null !!!!!");
+//						return;
+//					}
+//					playerPerk.getPlayerInfo().setIsSchematicCopied(false);
+//					job.addStateChangedListener(jobEntryListener);
+//				}
+//			});
+			bp.performAsAsyncJob(tsSession, playerEntry,
+					"loadIslandSchematic:" + playerPerk.getPlayerInfo().getPlayerName() + "-" + file.getName(), action);
+>>>>>>> parent of 74a1f13f... Fix PlayerPerk nullptr on schem loading
 		}
 
 		class PasteAction implements IFuncParamEx<Integer, ICancelabeEditSession, MaxChangedBlocksException> {
@@ -213,33 +326,32 @@ public enum AsyncWorldEditHandler {
 			}
 		}
 
-		@Override
-		public void onDisable(Plugin plugin) {
+        @Override
+        public void onDisable(Plugin plugin) {
 
-		}
+        }
 
-		@Override
-		public EditSession createEditSession(World world, int maxBlocks) {
-			return WorldEditHandler.createEditSession(world, maxBlocks);
-		}
+        @Override
+        public EditSession createEditSession(World world, int maxBlocks) {
+            return WorldEditHandler.createEditSession(world, maxBlocks);
+        }
 
-		@Override
-		public void regenerate(final Region region, final Runnable onCompletion) {
-			uSkyBlock.getInstance().sync(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(),
-								region.getArea() * 255);
-						editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
-						editSession.setFastMode(true);
-						editSession.getWorld().regenerate(region, editSession);
-						editSession.flushSession();
-					} finally {
-						onCompletion.run();
-					}
-				}
-			});
-		}
-	};
+        @Override
+        public void regenerate(final Region region, final Runnable onCompletion) {
+            uSkyBlock.getInstance().sync(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final EditSession editSession = WorldEditHandler.createEditSession(region.getWorld(), region.getArea() * 255);
+                        editSession.setReorderMode(EditSession.ReorderMode.MULTI_STAGE);
+                        editSession.setFastMode(true);
+                        editSession.getWorld().regenerate(region, editSession);
+                        editSession.flushSession();
+                    } finally {
+                        onCompletion.run();
+                    }
+                }
+            });
+        }
+    };
 }

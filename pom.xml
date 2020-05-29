@@ -148,15 +148,12 @@
         </repository>
         <repository> <!-- WorldEdit/WorldGuard -->
             <id>sk89q-repo</id>
-<<<<<<< HEAD
             <url>http://maven.sk89q.com/repo/</url>
         </repository>
         <repository> <!-- MultiVerse -->
             <id>Multiverse-Core</id>
             <url>http://repo.onarandombox.com/content/repositories/multiverse/</url>
-=======
             <url>https://maven.sk89q.com/repo/</url>
->>>>>>> master
         </repository>
         <!-- MV-Core repo mainly returns 404's, hosting on uskyblock-dependencies for now -->
 <!--        <repository> &lt;!&ndash; MultiVerse &ndash;&gt;-->
@@ -273,13 +270,11 @@
                 <version>${deluxechat.version}</version>
             </dependency>
             <dependency>
-<<<<<<< HEAD
 				<groupId>org.primesoft.asyncworldedit</groupId>
 				<artifactId>AsyncWorldEdit-API</artifactId>
 				<version>[2.2.0-rc-01, 2.2.0)</version>
 				<type>jar</type>
 			</dependency>
-=======
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
                 <version>${jbannotations.version}</version>
@@ -289,7 +284,6 @@
                 <artifactId>paperlib</artifactId>
                 <version>${paperlib.version}</version>
             </dependency>
->>>>>>> master
         </dependencies>
     </dependencyManagement>
 </project>

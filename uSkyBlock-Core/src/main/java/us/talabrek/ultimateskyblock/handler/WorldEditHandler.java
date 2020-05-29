@@ -41,7 +41,7 @@ import java.util.logging.Logger;
 public class WorldEditHandler {
     private static final Logger log = Logger.getLogger(WorldEditHandler.class.getName());
 
-    public static void loadIslandSchematic(final File file, final Location origin, final PlayerPerk playerPerk) {
+    public static void loadIslandSchematic(final File file, final Location origin, PlayerPerk playerPerk) {
         log.finer("Trying to load schematic " + file);
         if (file == null || !file.exists() || !file.canRead()) {
             LogUtil.log(Level.WARNING, "Unable to load schematic " + file);
