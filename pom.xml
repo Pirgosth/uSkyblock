@@ -4,12 +4,14 @@
     <groupId>uSkyBlock</groupId>
     <artifactId>uSkyBlock</artifactId>
     <packaging>pom</packaging>
-    <version>2.8.7</version>
+    <version>2.8.8-SNAPSHOT</version>
     <name>Ultimate SkyBlock</name>
 
     <properties>
+        <jbannotations.version>19.0.0</jbannotations.version>
         <api.version>${project.version}</api.version>
         <bukkit-utils.version>1.23-SNAPSHOT</bukkit-utils.version>
+        <paperlib.version>1.0.3</paperlib.version>
         <po-utils.version>1.2</po-utils.version>
         <deluxechat.version>1.6</deluxechat.version>
         <vault.version>1.7</vault.version>
@@ -146,12 +148,21 @@
         </repository>
         <repository> <!-- WorldEdit/WorldGuard -->
             <id>sk89q-repo</id>
+<<<<<<< HEAD
             <url>http://maven.sk89q.com/repo/</url>
         </repository>
         <repository> <!-- MultiVerse -->
             <id>Multiverse-Core</id>
             <url>http://repo.onarandombox.com/content/repositories/multiverse/</url>
+=======
+            <url>https://maven.sk89q.com/repo/</url>
+>>>>>>> master
         </repository>
+        <!-- MV-Core repo mainly returns 404's, hosting on uskyblock-dependencies for now -->
+<!--        <repository> &lt;!&ndash; MultiVerse &ndash;&gt;-->
+<!--            <id>onarandombox</id>-->
+<!--            <url>http://repo.onarandombox.com/nexus/content/groups/public</url>-->
+<!--        </repository>-->
         <repository> <!-- bStats -->
             <id>CodeMC</id>
             <url>https://repo.codemc.org/repository/maven-public</url>
@@ -160,7 +171,7 @@
             <id>mvdw-software</id>
             <url>https://repo.mvdw-software.com/content/groups/public/</url>
         </repository>
-        <repository> <!-- Jitpack for AnvilGUI -->
+        <repository> <!-- Jitpack for AnvilGUI, Vault -->
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
@@ -262,11 +273,23 @@
                 <version>${deluxechat.version}</version>
             </dependency>
             <dependency>
+<<<<<<< HEAD
 				<groupId>org.primesoft.asyncworldedit</groupId>
 				<artifactId>AsyncWorldEdit-API</artifactId>
 				<version>[2.2.0-rc-01, 2.2.0)</version>
 				<type>jar</type>
 			</dependency>
+=======
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jbannotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.papermc</groupId>
+                <artifactId>paperlib</artifactId>
+                <version>${paperlib.version}</version>
+            </dependency>
+>>>>>>> master
         </dependencies>
     </dependencyManagement>
 </project>

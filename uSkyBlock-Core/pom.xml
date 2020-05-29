@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
+<<<<<<< HEAD
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
@@ -10,6 +11,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
 	<artifactId>uSkyBlock-Core</artifactId>
+=======
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>uSkyBlock</artifactId>
+        <groupId>uSkyBlock</groupId>
+        <version>2.8.8-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>uSkyBlock-Core</artifactId>
+>>>>>>> master
 
 	<properties>
 		<maven.deploy.skip>false</maven.deploy.skip>
@@ -221,6 +234,7 @@
 		</resources>
 	</build>
 
+<<<<<<< HEAD
 	<profiles>
 		<profile>
 			<id>1.15</id>
@@ -328,6 +342,115 @@
 			</build>
 		</profile>
 	</profiles>
+=======
+    <profiles>
+        <profile>
+            <id>1.15</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                    <version>1.15.2-R0.1-SNAPSHOT</version>
+                    <optional>true</optional>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>i18n</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.rlf</groupId>
+                        <artifactId>gettext-maven-plugin</artifactId>
+                        <version>1.2.10</version>
+                        <executions>
+                            <execution>
+                                <id>find-bukkit-utils-msgids</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>gettext</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceDirectory>${project.parent.basedir}/bukkit-utils/src/main/java</sourceDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>find-msgids</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>gettext</goal>
+                                </goals>
+                                <configuration>
+                                    <extraArgs>
+                                        <arg>-j</arg>
+                                    </extraArgs>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>update-po-files</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>merge</goal>
+                                </goals>
+                                <configuration>
+                                    <msgmergeCmd>${msgmergeCmd}</msgmergeCmd>
+                                    <extraArgs>
+                                        <arg>-N</arg>
+                                    </extraArgs>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>clear-fuzzy</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>attrib</goal>
+                                </goals>
+                                <configuration>
+                                    <extraArgs>
+                                        <arg>--clear-fuzzy</arg>
+                                        <arg>--empty</arg>
+                                        <arg>--no-obsolete</arg>
+                                    </extraArgs>
+                                    <excludes>
+                                        <exclude>xx_PIRATE.po</exclude>
+                                        <exclude>xx_lol_US.po</exclude>
+                                    </excludes>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>report-po-completion</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <msgfmtCmd>${msgfmtCmd}</msgfmtCmd>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                            <javaVersion>2</javaVersion>
+                            <poDirectory>${project.basedir}/src/main/po</poDirectory>
+                            <targetBundle>us.talabrek.ultimateskyblock.i18n.Messages</targetBundle>
+                            <outputFormat>properties</outputFormat>
+                            <extraArgs>
+                                <arg>--no-location</arg>
+                            </extraArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+>>>>>>> master
 
 	<dependencies>
 		<dependency>
@@ -354,6 +477,7 @@
 			<optional>true</optional>
 		</dependency>
 
+<<<<<<< HEAD
 		<!-- PaperLib -->
 		<dependency>
 			<groupId>io.papermc</groupId>
@@ -501,4 +625,145 @@
 			<type>jar</type>
 		</dependency>
 	</dependencies>
+=======
+        <!-- PaperLib -->
+        <dependency>
+            <groupId>io.papermc</groupId>
+            <artifactId>paperlib</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <!-- AnvilGUI -->
+        <dependency>
+            <groupId>com.github.WesJD</groupId>
+            <artifactId>AnvilGUI</artifactId>
+            <version>master-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Multiverse -->
+        <dependency>
+            <groupId>com.onarandombox.multiversecore</groupId>
+            <artifactId>Multiverse-Core</artifactId>
+            <version>4.1.0</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.onarandombox.multiverseinventories</groupId>
+            <artifactId>Multiverse-Inventories</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- bStats -->
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>1.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- OPTIONAL -->
+        <dependency>
+            <groupId>com.connorlinfoot.actionbarapi</groupId>
+            <artifactId>ActionBarAPI</artifactId>
+            <version>1.5.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>be.maximvdw</groupId>
+            <artifactId>MVdWPlaceholderAPI</artifactId>
+            <version>3.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <!-- MVdWPlaceholderAPI includes a lot of unpublished dependencies, like Spigot 1.9 -->
+            <exclusions>
+                <exclusion>
+                    <artifactId>*</artifactId>
+                    <groupId>*</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>me.clip.deluxechat</groupId>
+            <artifactId>DeluxeChatPlaceholderAPI</artifactId>
+        </dependency>
+        <!-- ANNOTATIONS -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- DEPRECATED -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- TESTING -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-vintage-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+>>>>>>> master
 </project>

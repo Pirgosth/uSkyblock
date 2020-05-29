@@ -13,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import us.talabrek.ultimateskyblock.Settings;
 import us.talabrek.ultimateskyblock.handler.AsyncWorldEditHandler;
+import us.talabrek.ultimateskyblock.island.task.LocateChestTask;
+import us.talabrek.ultimateskyblock.island.task.CreateIslandTask.SchemValidator;
 import us.talabrek.ultimateskyblock.player.Perk;
 import us.talabrek.ultimateskyblock.player.PlayerPerk;
 import us.talabrek.ultimateskyblock.uSkyBlock;
@@ -79,7 +81,7 @@ public class IslandGenerator {
      * @param cSchem New island schematic.
      * @return True if the island was generated, false otherwise.
      */
-    public boolean createIsland(@NotNull PlayerPerk playerPerk, @NotNull Location next, @Nullable String cSchem) {
+    public boolean createIsland(@NotNull PlayerPerk playerPerk, @NotNull Location next, @Nullable String cSchem, @Nullable SchemValidator schemValidator) {
         // Hacky, but clear the Orphan info
         next.setYaw(0);
         next.setPitch(0);
@@ -90,11 +92,11 @@ public class IslandGenerator {
             netherFile = netherSchematic;
         }
         if (schemFile.exists() && Bukkit.getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
-            AsyncWorldEditHandler.loadIslandSchematic(schemFile, next, playerPerk);
+            AsyncWorldEditHandler.loadIslandSchematic(schemFile, next, playerPerk, schemValidator);
             World skyBlockNetherWorld = uSkyBlock.getInstance().getWorldManager().getNetherWorld();
             if (skyBlockNetherWorld != null) {
                 Location netherHome = new Location(skyBlockNetherWorld, next.getBlockX(), Settings.nether_height, next.getBlockZ());
-                AsyncWorldEditHandler.loadIslandSchematic(netherFile, netherHome, playerPerk);
+                AsyncWorldEditHandler.loadIslandSchematic(netherFile, netherHome, playerPerk, null);
             }
             return true;
         } else {

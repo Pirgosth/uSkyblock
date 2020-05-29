@@ -117,7 +117,7 @@ public class WorldManager {
         World world = spawnLocation.getWorld();
 
         if (plugin.getConfig().getInt("options.general.spawnSize", 0) > 32 && schematic.exists()) {
-            AsyncWorldEditHandler.loadIslandSchematic(schematic, spawnLocation, null);
+            AsyncWorldEditHandler.loadIslandSchematic(schematic, spawnLocation, null, null);
         } else {
             Block spawnBlock = world.getBlockAt(spawnLocation).getRelative(BlockFace.DOWN);
             spawnBlock.setType(Material.GOLD_BLOCK);
