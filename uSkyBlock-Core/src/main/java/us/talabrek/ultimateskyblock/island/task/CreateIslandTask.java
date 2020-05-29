@@ -36,6 +36,7 @@ public class CreateIslandTask extends BukkitRunnable {
         }
         GenerateTask generateTask = new GenerateTask(plugin, player, playerPerk.getPlayerInfo(), next, playerPerk, cSchem);
         final BukkitRunnable completionWatchDog = new LocateChestTask(plugin, player, next, generateTask, this.schemValidator);
+        completionWatchDog.runTaskTimer(this.plugin, 0L, 20L);
     }
     
     public static class SchemValidator{
