@@ -96,6 +96,7 @@ public class IslandGenerator {
             World skyBlockNetherWorld = uSkyBlock.getInstance().getWorldManager().getNetherWorld();
             if (skyBlockNetherWorld != null) {
                 Location netherHome = new Location(skyBlockNetherWorld, next.getBlockX(), Settings.nether_height, next.getBlockZ());
+                playerPerk.getPlayerInfo().setNetherHomeLocation(netherHome);
                 AsyncWorldEditHandler.loadIslandSchematic(netherFile, netherHome, playerPerk, null);
             }
             return true;
