@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -894,6 +895,7 @@ public class SkyBlockMenu {
         } else if (currentItem.getType() == Material.OAK_DOOR) {
             p.closeInventory();
             p.performCommand("island home");
+            Bukkit.getPluginManager().callEvent(new PlayerCommandPreprocessEvent(p, "/island home"));
         } else if (currentItem.getType() == Material.EXPERIENCE_BOTTLE) {
             p.closeInventory();
             p.performCommand("island level");
