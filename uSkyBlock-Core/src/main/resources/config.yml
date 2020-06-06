@@ -73,6 +73,7 @@ options:
     spawn-limits:
       enabled: true
       animals: 64
+      acquatics: 30
       monsters: 50
       villagers: 16
       golems: 5
@@ -276,6 +277,7 @@ donor-perks:
     extraItems: [BONE_MEAL:1]
     maxPartySize: 5
     animals: 84
+    acquatics: 40
     monsters: 60
     villagers: 20
     golems: 6
@@ -313,6 +315,7 @@ island-schemes:
     extraItems: ''
     maxPartySize: 4
     animals: 64
+    acquatics: 40
     monsters: 50
     villagers: 16
     golems: 5
@@ -333,6 +336,7 @@ island-schemes:
     - FLINT_AND_STEEL:1
     maxPartySize: 4
     animals: 64
+    acquatics: 35
     monsters: 50
     villagers: 16
     golems: 5
@@ -437,8 +441,8 @@ tool-menu:
 # usb_island_leader, usb_island_bans, usb_island_members, usb_island_trustees
 # usb_island_biome, usb_island_schematic
 # usb_island_location, usb_island_location_x, usb_island_location_y, usb_island_location_z
-# usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_villagers_max,
-# usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_villagers
+# usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_acquatics_max, usb_island_villagers_max,
+# usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_acquatics, usb_island_villagers
 placeholder:
 
   # Hooks directly into DeluxeChatPlaceholderAPI

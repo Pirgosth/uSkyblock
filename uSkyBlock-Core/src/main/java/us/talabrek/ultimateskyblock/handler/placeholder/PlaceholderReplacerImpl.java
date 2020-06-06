@@ -34,11 +34,13 @@ public class PlaceholderReplacerImpl implements PlaceholderAPI.PlaceholderReplac
             "usb_island_golems_max",
             "usb_island_monsters_max",
             "usb_island_animals_max",
+            "usb_island_acquatics_max",
             "usb_island_villagers_max",
             "usb_island_partysize_max",
             "usb_island_golems",
             "usb_island_monsters",
             "usb_island_animals",
+            "usb_island_acquatics",
             "usb_island_villagers",
             "usb_island_partysize",
             "usb_island_biome",
@@ -102,11 +104,13 @@ public class PlaceholderReplacerImpl implements PlaceholderAPI.PlaceholderReplac
             case "usb_island_golems_max": return "" + islandInfo.getMaxGolems();
             case "usb_island_monsters_max": return "" + islandInfo.getMaxMonsters();
             case "usb_island_animals_max": return "" + islandInfo.getMaxAnimals();
+            case "usb_island_acquatics_max": return "" + islandInfo.getMaxAcquatics();
             case "usb_island_villagers_max": return "" + islandInfo.getMaxVillagers();
             case "usb_island_partysize_max": return "" + islandInfo.getMaxPartySize();
             case "usb_island_golems": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.GOLEM);
             case "usb_island_monsters": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.MONSTER);
             case "usb_island_animals": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.ANIMAL);
+            case "usb_island_acquatics": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.ACQUATIC);
             case "usb_island_villagers": return "" + plugin.getLimitLogic().getCreatureCount(islandInfo).get(LimitLogic.CreatureType.VILLAGER);
             case "usb_island_partysize": return "" + islandInfo.getPartySize();
             case "usb_island_biome": return islandInfo.getBiome();

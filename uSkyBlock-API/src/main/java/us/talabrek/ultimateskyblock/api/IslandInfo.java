@@ -21,6 +21,15 @@ public interface IslandInfo {
      * @return the maximum number of members this island can have.
      */
     int getMaxPartySize();
+    
+    
+    /**
+     * Returns the maximum number of water animals that can spawn on this island.
+     *
+     * Note: Only enforced if <pre>spawn-limits</pre> are enabled in <pre>config.yml</pre>
+     * @return the maximum number of water animals that can spawn on this island.
+     */
+    int getMaxAcquatics();
 
     /**
      * Returns the maximum number of animals that can spawn on this island.

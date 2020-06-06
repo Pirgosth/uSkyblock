@@ -1,13 +1,5 @@
 package us.talabrek.ultimateskyblock.player;
 
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import us.talabrek.ultimateskyblock.Settings;
-import us.talabrek.ultimateskyblock.island.IslandGenerator;
-import us.talabrek.ultimateskyblock.uSkyBlock;
-import dk.lockfuglsang.minecraft.util.ItemStackUtil;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -15,6 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import dk.lockfuglsang.minecraft.util.ItemStackUtil;
+import us.talabrek.ultimateskyblock.Settings;
+import us.talabrek.ultimateskyblock.uSkyBlock;
+import us.talabrek.ultimateskyblock.island.IslandGenerator;
 
 /**
  * Responsible for calculating player specific perks based on permissions.
@@ -29,6 +30,7 @@ public class PerkLogic {
         this.plugin = plugin;
         defaultPerk = new Perk(Collections.emptyList(), Settings.general_maxPartySize,
                 plugin.getConfig().getInt("options.island.spawn-limits.animals", 30),
+                plugin.getConfig().getInt("options.island.spawn-limits.acquatics", 30),
                 plugin.getConfig().getInt("options.island.spawn-limits.monsters", 50),
                 plugin.getConfig().getInt("options.island.spawn-limits.villagers", 16),
                 plugin.getConfig().getInt("options.island.spawn-limits.golems", 4),
@@ -55,6 +57,7 @@ public class PerkLogic {
                         .schematics(schemeName)
                         .maxPartySize(config.getInt("maxPartySize", 0))
                         .animals(config.getInt("animals", 0))
+                        .acquatics(config.getInt("acquatics", 0))
                         .monsters(config.getInt("monsters", 0))
                         .villagers(config.getInt("villagers", 0))
                         .golems(config.getInt("golems", 0))
@@ -130,6 +133,7 @@ public class PerkLogic {
                         ItemStackUtil.createItemList(config.getStringList("extraItems")),
                         config.getInt("maxPartySize", defaultPerk.getMaxPartySize()),
                         config.getInt("animals", defaultPerk.getAnimals()),
+                        config.getInt("acquatics", defaultPerk.getAcquatics()),
                         config.getInt("monsters", defaultPerk.getMonsters()),
                         config.getInt("villagers", defaultPerk.getVillagers()),
                         config.getInt("golems", defaultPerk.getGolems()),
@@ -223,55 +227,60 @@ public class PerkLogic {
         private Perk perk;
 
         public PerkBuilder() {
-            perk = new Perk(null, 0, 0, 0, 0, 0, 0, 0, null, null);
+            perk = new Perk(null, 0, 0, 0, 0, 0, 0, 0, 0, null, null);
         }
 
         public PerkBuilder(Perk basePerk) {
-            perk = basePerk != null ? basePerk : new Perk(null, 0, 0, 0, 0, 0, 0, 0, null, null);
+            perk = basePerk != null ? basePerk : new Perk(null, 0, 0, 0, 0, 0, 0, 0, 0, null, null);
         }
 
         public PerkBuilder extraItems(List<ItemStack> items) {
-            perk = perk.combine(new Perk(items, 0, 0, 0, 0, 0, 0, 0, null, null));
+            perk = perk.combine(new Perk(items, 0, 0, 0, 0, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder maxPartySize(int max) {
-            perk = perk.combine(new Perk(null, max, 0, 0, 0, 0, 0, 0, null, null));
+            perk = perk.combine(new Perk(null, max, 0, 0, 0, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder animals(int animals) {
-            perk = perk.combine(new Perk(null, 0, animals, 0, 0, 0, 0, 0, null, null));
+            perk = perk.combine(new Perk(null, 0, animals, 0, 0, 0, 0, 0, 0, null, null));
             return this;
+        }
+        
+        public PerkBuilder acquatics(int acquatics) {
+        	perk = perk.combine(new Perk(null, 0, 0, acquatics, 0, 0, 0, 0, 0, null, null));
+        	return this;
         }
 
         public PerkBuilder monsters(int monsters) {
-            perk = perk.combine(new Perk(null, 0, 0, monsters, 0, 0, 0, 0, null, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, monsters, 0, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder villagers(int villagers) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, villagers, 0, 0, 0, null, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, villagers, 0, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder golems(int golems) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, golems, 0, 0, null, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, golems, 0, 0, null, null));
             return this;
         }
 
         public PerkBuilder rewBonus(double bonus) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, bonus, 0, null, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, bonus, 0, null, null));
             return this;
         }
 
         public PerkBuilder hungerReduction(double reduction) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, reduction, null, null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, 0, reduction, null, null));
             return this;
         }
 
         public PerkBuilder schematics(String... schemes) {
-            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, 0, Arrays.asList(schemes), null));
+            perk = perk.combine(new Perk(null, 0, 0, 0, 0, 0, 0, 0, 0, Arrays.asList(schemes), null));
             return this;
         }
 

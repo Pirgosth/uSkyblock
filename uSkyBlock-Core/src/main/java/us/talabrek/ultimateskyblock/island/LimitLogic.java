@@ -27,10 +27,11 @@ import static dk.lockfuglsang.minecraft.po.I18nUtil.marktr;
 import static dk.lockfuglsang.minecraft.po.I18nUtil.tr;
 
 public class LimitLogic {
-    public enum CreatureType { UNKNOWN, ANIMAL, MONSTER, VILLAGER, GOLEM }
+    public enum CreatureType { UNKNOWN, ANIMAL, ACQUATIC, MONSTER, VILLAGER, GOLEM }
     static {
         marktr("UNKNOWN");
         marktr("ANIMAL");
+        marktr("ACQUATIC");
         marktr("MONSTER");
         marktr("VILLAGER");
         marktr("GOLEM");
@@ -78,10 +79,11 @@ public class LimitLogic {
 
     public CreatureType getCreatureType(LivingEntity creature) {
         if (creature instanceof Monster
-                || creature instanceof WaterMob
                 || creature instanceof Slime
                 || creature instanceof Ghast) {
             return CreatureType.MONSTER;
+        } else if (creature instanceof WaterMob) {
+        	return CreatureType.ACQUATIC;
         } else if (creature instanceof Animals) {
             return CreatureType.ANIMAL;
         } else if (creature instanceof Villager) {
@@ -94,11 +96,12 @@ public class LimitLogic {
 
     public CreatureType getCreatureType(EntityType entityType) {
         if (Monster.class.isAssignableFrom(entityType.getEntityClass())
-                || WaterMob.class.isAssignableFrom(entityType.getEntityClass())
                 || Slime.class.isAssignableFrom(entityType.getEntityClass())
                 || Ghast.class.isAssignableFrom(entityType.getEntityClass())
                 ) {
             return CreatureType.MONSTER;
+        } else if (WaterMob.class.isAssignableFrom(entityType.getEntityClass())) {
+            return CreatureType.ACQUATIC;
         } else if (Animals.class.isAssignableFrom(entityType.getEntityClass())) {
             return CreatureType.ANIMAL;
         } else if (Villager.class.isAssignableFrom(entityType.getEntityClass())) {
@@ -122,6 +125,7 @@ public class LimitLogic {
     private int getMax(us.talabrek.ultimateskyblock.api.IslandInfo islandInfo, CreatureType creatureType) {
         switch (creatureType) {
             case ANIMAL: return islandInfo.getMaxAnimals();
+            case ACQUATIC: return islandInfo.getMaxAcquatics();
             case MONSTER: return islandInfo.getMaxMonsters();
             case VILLAGER: return islandInfo.getMaxVillagers();
             case GOLEM: return islandInfo.getMaxGolems();

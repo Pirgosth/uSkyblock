@@ -221,6 +221,11 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
                 section.set("maxAnimals", perk.getAnimals());
                 dirty = true;
             }
+            int maxAcquatics = section.getInt("maxAcquatics", 0);
+            if(perk.getAcquatics() != maxAcquatics) {
+            	section.set("maxAcquatics", perk.getAcquatics());
+            	dirty = true;
+            }
             int maxMonsters = section.getInt("maxMonsters", 0);
             if (perk.getMonsters() != maxMonsters) {
                 section.set("maxMonsters", perk.getMonsters());
@@ -293,6 +298,12 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         return getMaxPartyIntValue("maxAnimals",
                 plugin.getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getAnimals());
     }
+    
+    @Override
+	public int getMaxAcquatics() {
+    	return getMaxPartyIntValue("maxAcquatics",
+                plugin.getPerkLogic().getIslandPerk(getSchematicName()).getPerk().getAcquatics());
+	}
 
     @Override
     public int getMaxMonsters() {
@@ -983,6 +994,7 @@ public class IslandInfo implements us.talabrek.ultimateskyblock.api.IslandInfo {
         str += ChatColor.DARK_AQUA + "Limits:\n";
         str += ChatColor.GRAY + "  - maxParty: " + ChatColor.DARK_AQUA + getMaxPartySize() + "\n";
         str += ChatColor.GRAY + "  - animals: " + ChatColor.DARK_AQUA + getMaxAnimals() + "\n";
+        str += ChatColor.GRAY + "  - acquatics: " + ChatColor.DARK_AQUA + getMaxAcquatics() + "\n";
         str += ChatColor.GRAY + "  - monsters: " + ChatColor.DARK_AQUA + getMaxMonsters() + "\n";
         str += ChatColor.GRAY + "  - villagers: " + ChatColor.DARK_AQUA + getMaxVillagers() + "\n";
         str += ChatColor.DARK_AQUA + "Bans:\n";
