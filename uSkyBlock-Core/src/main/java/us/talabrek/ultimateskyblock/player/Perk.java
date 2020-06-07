@@ -20,6 +20,7 @@ public class Perk {
 	private final int animals;
 	private final int acquatics;
 	private final int monsters;
+	private final int slimes;
 	private final List<ItemStack> extraItems;
 	private final double rewBonus;
 	private final double hungerReduction;
@@ -28,13 +29,14 @@ public class Perk {
 	private final int villagers;
 	private final int golems;
 
-	Perk(List<ItemStack> extraItems, int maxPartySize, int animals, int acquatics, int monsters, int villagers,
-			int golems, double rewBonus, double hungerReduction, List<String> schematics,
+	Perk(List<ItemStack> extraItems, int maxPartySize, int animals, int acquatics, int monsters, int slimes,
+			int villagers, int golems, double rewBonus, double hungerReduction, List<String> schematics,
 			Map<Material, Integer> blockLimits) {
 		this.maxPartySize = maxPartySize >= 0 ? maxPartySize : 0;
 		this.animals = animals >= 0 ? animals : 0;
 		this.acquatics = acquatics >= 0 ? acquatics : 0;
 		this.monsters = monsters >= 0 ? monsters : 0;
+		this.slimes = slimes >= 0 ? slimes : 0;
 		this.villagers = villagers >= 0 ? villagers : 0;
 		this.golems = golems >= 0 ? golems : 0;
 		this.extraItems = extraItems != null ? extraItems : Collections.<ItemStack>emptyList();
@@ -58,6 +60,10 @@ public class Perk {
 
 	public int getMonsters() {
 		return monsters;
+	}
+
+	public int getSlimes() {
+		return slimes;
 	}
 
 	public int getVillagers() {
@@ -97,16 +103,18 @@ public class Perk {
 		schems.addAll(other.getSchematics());
 		return new Perk(items, Math.max(maxPartySize, other.getMaxPartySize()), Math.max(animals, other.getAnimals()),
 				Math.max(acquatics, other.getAcquatics()), Math.max(monsters, other.getMonsters()),
-				Math.max(villagers, other.getVillagers()), Math.max(golems, other.getGolems()),
-				Math.max(rewBonus, other.getRewBonus()), Math.max(hungerReduction, other.getHungerReduction()), schems,
-				null);
+				Math.max(slimes, other.getSlimes()), Math.max(villagers, other.getVillagers()),
+				Math.max(golems, other.getGolems()), Math.max(rewBonus, other.getRewBonus()),
+				Math.max(hungerReduction, other.getHungerReduction()), schems, null);
 	}
 
 	@Override
 	public String toString() {
 		return (maxPartySize > 0 ? "maxPartySize:" + maxPartySize + "\n" : "")
-				+ (animals > 0 ? "animals:" + animals + "\n" : "") + (acquatics > 0 ? "acquatics:" + acquatics + "\n" : "")
+				+ (animals > 0 ? "animals:" + animals + "\n" : "")
+				+ (acquatics > 0 ? "acquatics:" + acquatics + "\n" : "")
 				+ (monsters > 0 ? "monsters:" + monsters + "\n" : "")
+				+ (slimes > 0 ? "slimes:" + slimes + "\n" : "")
 				+ (villagers > 0 ? "villagers:" + villagers + "\n" : "") + (golems > 0 ? "golems:" + golems + "\n" : "")
 				+ (!extraItems.isEmpty() ? "extraItems:" + ItemStackUtil.asShortString(extraItems) + "\n" : "")
 				+ (rewBonus > 0 ? "rewBonus:" + rewBonus + "\n" : "")

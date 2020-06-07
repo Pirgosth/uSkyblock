@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-09-28 07:38+0100\n"
+"PO-Revision-Date: 2020-06-07 23:07+0200\n"
 "Last-Translator: maol3 <maol3@open.90gq.se>\n"
 "Language-Team: SV\n"
 "Language: sv\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Loco-Source-Locale: sv_SE\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Loco-Target-Locale: zz_ZZ\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.3.1\n"
 
 # ???
 msgid "d"
@@ -1240,8 +1240,14 @@ msgstr "OKÄND"
 msgid "ANIMAL"
 msgstr "DJUR"
 
+msgid "ACQUATIC"
+msgstr ""
+
 msgid "MONSTER"
 msgstr "MONSTER"
+
+msgid "SLIME"
+msgstr ""
 
 msgid "VILLAGER"
 msgstr "BYBO"

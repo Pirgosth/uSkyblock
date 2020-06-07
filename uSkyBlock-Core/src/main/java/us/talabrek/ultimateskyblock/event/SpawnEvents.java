@@ -17,6 +17,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MonsterEggs;
@@ -96,6 +97,9 @@ public class SpawnEvents implements Listener {
         }
         if (!event.isCancelled() && ADMIN_INITIATED.contains(event.getSpawnReason())) {
             return; // Allow it, the above method would have blocked it if it should be blocked.
+        }
+        if(event.getSpawnReason() == SpawnReason.SLIME_SPLIT) {
+        	return; // Allow smaller slimes to spawn, prevent new natural one to spawn.
         }
         checkLimits(event, event.getEntity().getType(), event.getLocation());
         if (event.getEntity() instanceof WaterMob) {

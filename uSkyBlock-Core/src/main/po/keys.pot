@@ -1105,6 +1105,9 @@ msgstr ""
 msgid "MONSTER"
 msgstr ""
 
+msgid "SLIME"
+msgstr ""
+
 msgid "VILLAGER"
 msgstr ""
 

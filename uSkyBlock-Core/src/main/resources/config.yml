@@ -75,6 +75,7 @@ options:
       animals: 64
       acquatics: 30
       monsters: 50
+      slimes: 12
       villagers: 16
       golems: 5
     block-limits:
@@ -279,6 +280,7 @@ donor-perks:
     animals: 84
     acquatics: 40
     monsters: 60
+    slimes: 15
     villagers: 20
     golems: 6
     # 10% more XP
@@ -317,6 +319,7 @@ island-schemes:
     animals: 64
     acquatics: 40
     monsters: 50
+    slimes: 12
     villagers: 16
     golems: 5
 
@@ -338,6 +341,7 @@ island-schemes:
     animals: 64
     acquatics: 35
     monsters: 50
+    slimes: 12
     villagers: 16
     golems: 5
     scoreMultiply: 0.9
@@ -441,8 +445,8 @@ tool-menu:
 # usb_island_leader, usb_island_bans, usb_island_members, usb_island_trustees
 # usb_island_biome, usb_island_schematic
 # usb_island_location, usb_island_location_x, usb_island_location_y, usb_island_location_z
-# usb_island_golems_max, usb_island_monsters_max, usb_island_animals_max, usb_island_acquatics_max, usb_island_villagers_max,
-# usb_island_golems, usb_island_monsters, usb_island_animals, usb_island_acquatics, usb_island_villagers
+# usb_island_golems_max, usb_island_monsters_max, usb_island_slimes_max, usb_island_animals_max, usb_island_acquatics_max, usb_island_villagers_max,
+# usb_island_golems, usb_island_monsters, usb_island_slimes, usb_island_animals, usb_island_acquatics, usb_island_villagers
 placeholder:
 
   # Hooks directly into DeluxeChatPlaceholderAPI

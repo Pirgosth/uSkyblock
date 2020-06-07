@@ -21,7 +21,14 @@ public interface IslandInfo {
      * @return the maximum number of members this island can have.
      */
     int getMaxPartySize();
-    
+
+    /**
+     * Returns the maximum number of animals that can spawn on this island.
+     *
+     * Note: Only enforced if <pre>spawn-limits</pre> are enabled in <pre>config.yml</pre>
+     * @return the maximum number of animals that can spawn on this island.
+     */
+    int getMaxAnimals();
     
     /**
      * Returns the maximum number of water animals that can spawn on this island.
@@ -32,21 +39,21 @@ public interface IslandInfo {
     int getMaxAcquatics();
 
     /**
-     * Returns the maximum number of animals that can spawn on this island.
-     *
-     * Note: Only enforced if <pre>spawn-limits</pre> are enabled in <pre>config.yml</pre>
-     * @return the maximum number of animals that can spawn on this island.
-     */
-    int getMaxAnimals();
-
-    /**
-     * Returns the maximum number of monsters (including squids) that can spawn on this island.
+     * Returns the maximum number of monsters that can spawn on this island.
      *
      * Note: Only enforced if <pre>spawn-limits</pre> are enabled in <pre>config.yml</pre>
      * @return the maximum number of monsters that can spawn on this island.
      */
     int getMaxMonsters();
-
+    
+    /**
+     * Returns the maximum number of slimes that can spawn on this island.
+     *
+     * Note: Only enforced if <pre>spawn-limits</pre> are enabled in <pre>config.yml</pre>
+     * @return the maximum number of slimes that can spawn on this island.
+     */
+    int getMaxSlimes();
+    
     /**
      * Returns the maximum number of villagers that can spawn on this island.
      *

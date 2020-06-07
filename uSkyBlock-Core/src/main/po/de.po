@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2016-10-16 17:54+0200\n"
+"PO-Revision-Date: 2020-06-07 23:06+0200\n"
 "Last-Translator: I9hdkill I9hdkill@spigotmc.org\n"
 "Language-Team: DE <LL@li.org>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Loco-Source-Locale: de_DE\n"
 "X-Loco-Parser: loco_parse_po\n"
 "X-Loco-Target-Locale: zz_ZZ\n"
-"X-Generator: Poedit 1.8.10\n"
+"X-Generator: Poedit 2.3.1\n"
 
 # ???
 msgid "d"
@@ -1251,8 +1251,14 @@ msgstr "Unbekannt"
 msgid "ANIMAL"
 msgstr "Tier"
 
+msgid "ACQUATIC"
+msgstr ""
+
 msgid "MONSTER"
 msgstr "Monster"
+
+msgid "SLIME"
+msgstr ""
 
 msgid "VILLAGER"
 msgstr "Dorfbewohner"

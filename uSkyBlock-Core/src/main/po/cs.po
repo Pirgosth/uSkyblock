@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-06-07 00:16+0200\n"
+"PO-Revision-Date: 2020-06-07 23:06+0200\n"
 "Last-Translator: martyHR\n"
 "Language-Team: martyHR@LordSet <marty@hranice.cz>\n"
 "Language: cs\n"
@@ -1240,6 +1240,9 @@ msgstr ""
 
 msgid "MONSTER"
 msgstr "Monster"
+
+msgid "SLIME"
+msgstr ""
 
 msgid "VILLAGER"
 msgstr "Vesnicanu"
